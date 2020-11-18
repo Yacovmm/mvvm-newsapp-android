@@ -2,7 +2,9 @@ package com.androiddevs.mvvmnewsapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.androiddevs.mvvmnewsapp.db.ArticleDaoHelperImplementation
 import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
+import com.androiddevs.mvvmnewsapp.db.IArticleDaoHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object AppModule {
+object DataBaseModule {
 
     @Singleton
     @Provides
@@ -29,6 +31,11 @@ object AppModule {
     @Provides
     fun provideArticleDao(articleDatabase: ArticleDatabase) =
         articleDatabase.getArticleDao()
+
+    @Singleton
+    @Provides
+    fun provideArticleHelper(articleDaoHelperImpl: ArticleDaoHelperImplementation)
+            : IArticleDaoHelper = articleDaoHelperImpl
 
 
 }
